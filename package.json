@@ -1,7 +1,7 @@
 {
-	"name": "sample-microservice-fastify-blog-posts",
+	"name": "sample-microservice-fastify-blog-query",
 	"version": "1.0.0",
-	"description": "Micro service built with Fastify to handle Posts for a Blog application.",
+	"description": "Micro service built with Fastify to handle queries for a Blog application.",
 	"scripts": {
 		"check": "tsc --noEmit",
 		"check:watch": "npm run check -- --watch",
@@ -17,13 +17,13 @@
 	},
 	"author": "caiquearaujo",
 	"license": "MIT",
-	"homepage": "https://github.com/caiquearaujo/sample-microservice-fastify-blog-posts#readme",
+	"homepage": "https://github.com/caiquearaujo/sample-microservice-fastify-blog-query#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/caiquearaujo/sample-microservice-fastify-blog-posts.git"
+		"url": "git+https://github.com/caiquearaujo/sample-microservice-fastify-blog-query.git"
 	},
 	"bugs": {
-		"url": "https://github.com/caiquearaujo/sample-microservice-fastify-blog-posts/issues"
+		"url": "https://github.com/caiquearaujo/sample-microservice-fastify-blog-query/issues"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.2.5",

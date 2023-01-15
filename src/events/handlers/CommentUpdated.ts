@@ -3,7 +3,7 @@ import PostRepository, {
 } from '@/repositories/PostRepository';
 import { IEventHandler } from '@/types/classes';
 
-class PostUpdated
+class CommentUpdated
 	implements IEventHandler<ICommentRecord & { postId: string }>
 {
 	protected name;
@@ -26,4 +26,4 @@ class PostUpdated
 	}
 }
 
-export default new PostUpdated();
+export default new CommentUpdated();
