@@ -60,6 +60,7 @@ describe('Posts Routes', () => {
 		expect(body.title).toBe('My first post');
 		expect(body.content).toBe('This is my first post');
 		expect(body.status).toBe('draft');
+		expect(body.comments.length).toBe(0);
 	});
 
 	it('GET /posts/:id -> cannot get a post', async () => {
@@ -92,5 +93,6 @@ describe('Posts Routes', () => {
 		expect(body[0].title).toBe('My first post');
 		expect(body[0].content).toBe('This is my first post');
 		expect(body[0].status).toBe('draft');
+		expect(body[0].comments.length).toBe(0);
 	});
 });

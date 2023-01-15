@@ -116,6 +116,7 @@ describe('Post Repository', () => {
 			id: '1',
 			author: 'John Doe',
 			content: 'This is my first comment',
+			status: 'pending',
 		});
 
 		expect(createdComment).toStrictEqual({

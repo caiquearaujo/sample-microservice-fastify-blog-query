@@ -62,10 +62,7 @@ export default class PostRepository {
 		return updatedPost;
 	}
 
-	static addComment(
-		postId: string,
-		comment: Omit<ICommentRecord, 'status'>
-	) {
+	static addComment(postId: string, comment: ICommentRecord) {
 		const found = PostRepository.get(postId);
 
 		if (!found) {
@@ -78,7 +75,6 @@ export default class PostRepository {
 
 		const createComment: ICommentRecord = {
 			...comment,
-			status: 'pending',
 		};
 
 		found.comments.push(createComment);
