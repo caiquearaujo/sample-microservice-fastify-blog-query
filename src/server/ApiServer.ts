@@ -61,14 +61,6 @@ export default class ApiServer implements IApiServer {
 		// Prepare application logger
 		Logger.prepareInstance(this.app.log);
 
-		// Subscribe to events
-		await EventBus.subscribe([
-			'post.created',
-			'post.updated',
-			'comment.created',
-			'comment.updated',
-		]);
-
 		// Prepare EventBus with handlers
 		EventBus.prepareInstance([
 			PostCreated,
@@ -76,6 +68,19 @@ export default class ApiServer implements IApiServer {
 			CommentCreated,
 			CommentUpdated,
 		]);
+
+		const events = [
+			'post.created',
+			'post.updated',
+			'comment.created',
+			'comment.updated',
+		];
+
+		// Get uncaught events
+		await EventBus.uncaught(events);
+
+		// Subscribe to events
+		await EventBus.subscribe(events);
 
 		// Plugins
 		await this.plugins.apply(this.app, this.env);

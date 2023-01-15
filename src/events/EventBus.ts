@@ -52,9 +52,37 @@ export default class EventBus {
 		}
 	}
 
+	public static async uncaught(events: string[]): Promise<boolean> {
+		try {
+			const { data } = await axios.post<
+				Array<{
+					event: string;
+					payload: object;
+				}>
+			>(`${EVENT_URL}/uncaught`, {
+				webhook: `http://${HOST}:${PORT}/webhook/events`,
+				events,
+			});
+
+			await Promise.all(
+				data.map(async ({ event, payload }) => {
+					console.log('Uncaught Event on Startup', event, payload);
+					await EventBus.getInstance().handle(event, payload);
+				})
+			);
+
+			return true;
+		} catch (err) {
+			Logger.getInstance().logger.error(err);
+			return false;
+		}
+	}
+
 	public async handle(event: string, payload: object): Promise<void> {
-		this.events.forEach(async e => {
-			await e.handle(event, payload);
-		});
+		await Promise.all(
+			this.events.map(async e => {
+				await e.handle(event, payload);
+			})
+		);
 	}
 }

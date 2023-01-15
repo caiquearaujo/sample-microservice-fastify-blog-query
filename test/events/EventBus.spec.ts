@@ -103,4 +103,40 @@ describe('Event Emitter', () => {
 		expect(handler.compatible).not.toHaveBeenCalled();
 		expect(handler.incompatible).toHaveBeenCalled();
 	});
+
+	it('can handle uncaught events', async () => {
+		EventBus.getInstance().handle = jest.fn();
+
+		mockedAxios.post.mockResolvedValue({
+			data: [
+				{
+					event: 'any.kindofevent',
+					payload: { ping: 'pong!' },
+					timestamp: 123456789,
+				},
+			],
+		});
+
+		const result = await EventBus.uncaught(['any.kindofevent']);
+
+		expect(mockedAxios.post).toHaveBeenCalledWith(
+			`${EVENT_URL}/uncaught`,
+			{
+				webhook: `http://${HOST}:${PORT}/webhook/events`,
+				events: ['any.kindofevent'],
+			}
+		);
+
+		expect(mockedAxios.post).toHaveBeenCalledTimes(1);
+
+		expect(EventBus.getInstance().handle).toHaveBeenCalledWith(
+			'any.kindofevent',
+			{
+				ping: 'pong!',
+			}
+		);
+		expect(EventBus.getInstance().handle).toHaveBeenCalledTimes(1);
+
+		expect(result).toBe(true);
+	});
 });
