@@ -55,9 +55,7 @@ export default class PostRepository {
 
 		const updatedPost = {
 			...found,
-			title: post.title ?? found.title,
-			content: post.content ?? found.content,
-			status: post.status ?? found.status,
+			...post,
 		};
 
 		globalPosts[id] = updatedPost;
