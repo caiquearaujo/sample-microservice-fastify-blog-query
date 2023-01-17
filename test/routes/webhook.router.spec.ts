@@ -2,14 +2,13 @@ import { FastifyInstance } from 'fastify';
 import ApiServer from '@/server/ApiServer';
 import FastifyApplierGroup from '@/server/FastifyApplierGroup';
 import routes from '@/routes';
-import plugins from '@/server/plugins';
 
 let app: FastifyInstance;
 
 beforeAll(async () => {
 	const api = new ApiServer({
 		routes: new FastifyApplierGroup(...routes),
-		plugins: new FastifyApplierGroup(...plugins),
+		plugins: new FastifyApplierGroup(),
 	});
 
 	await api.bootstrap();

@@ -5,14 +5,13 @@ import PostRepository, {
 	IPostRecord,
 } from '@/repositories/PostRepository';
 import routes from '@/routes';
-import plugins from '@/server/plugins';
 
 let app: FastifyInstance;
 
 beforeAll(async () => {
 	const api = new ApiServer({
 		routes: new FastifyApplierGroup(...routes),
-		plugins: new FastifyApplierGroup(...plugins),
+		plugins: new FastifyApplierGroup(),
 	});
 
 	await api.bootstrap();
